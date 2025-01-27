@@ -19,6 +19,7 @@ class CommissionMixin(models.AbstractModel):
         readonly=False,
         store=True,
         copy=True,
+        precompute=True,
     )
     product_id = fields.Many2one(comodel_name="product.product", string="Product")
     commission_free = fields.Boolean(
@@ -26,6 +27,7 @@ class CommissionMixin(models.AbstractModel):
         compute="_compute_commission_free",
         store=True,
         readonly=True,
+        precompute=True,
     )
     commission_status = fields.Char(
         compute="_compute_commission_status",
@@ -126,11 +128,13 @@ class CommissionLineMixin(models.AbstractModel):
         store=True,
         readonly=False,
         copy=True,
+        precompute=True,
     )
     amount = fields.Monetary(
         string="Commission Amount",
         compute="_compute_amount",
         store=True,
+        precompute=True,
     )
     # Fields to be overriden with proper source (via related or computed field)
     currency_id = fields.Many2one(comodel_name="res.currency")
